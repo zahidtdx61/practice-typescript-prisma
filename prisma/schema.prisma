@@ -18,6 +18,8 @@ model User {
   email String @unique
   firstName String?
   lastName String?
+  countryCode String?
+  phoneNumber String?
   password String
 }
 
