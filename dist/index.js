@@ -11,8 +11,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
-// interface user {
-// }
 function insertUser(email, firstName, lastName, password) {
     return __awaiter(this, void 0, void 0, function* () {
         const resp = yield prisma.user.create({
@@ -26,4 +24,22 @@ function insertUser(email, firstName, lastName, password) {
         console.log(resp);
     });
 }
-insertUser("rahim@karim.com", "Rahim", "Karim", "myPass");
+function updateUser(email_1, _a) {
+    return __awaiter(this, arguments, void 0, function* (email, { firstName, lastName }) {
+        const resp = yield prisma.user.update({
+            where: {
+                email,
+            },
+            data: {
+                firstName,
+                lastName,
+            },
+        });
+        console.log(resp);
+    });
+}
+// insertUser("rahim2@karim.com", "Rahim", "Karim", "myPass");
+updateUser("rahim2@karim.com", {
+    firstName: "Rahim-updated-2",
+    lastName: "Karim",
+});

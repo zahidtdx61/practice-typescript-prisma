@@ -1,10 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
-// interface user {
-
-// }
-
 async function insertUser(
   email: string,
   firstName: string,
@@ -23,4 +19,30 @@ async function insertUser(
   console.log(resp);
 }
 
-insertUser("rahim2@karim.com", "Rahim", "Karim", "myPass");
+interface UpdateParams {
+  firstName: string;
+  lastName: string;
+}
+
+async function updateUser(
+  email: string,
+  { firstName, lastName }: UpdateParams
+) {
+  const resp = await prisma.user.update({
+    where: {
+      email,
+    },
+    data: {
+      firstName,
+      lastName,
+    },
+  });
+
+  console.log(resp);
+}
+
+// insertUser("rahim2@karim.com", "Rahim", "Karim", "myPass");
+updateUser("rahim2@karim.com", {
+  firstName: "Rahim-updated-2",
+  lastName: "Karim",
+});
